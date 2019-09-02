@@ -1,4 +1,5 @@
 <?php
+
 namespace App;
 use App\Services\MessageService;
 use App\Services\UserService;
@@ -67,26 +68,26 @@ class ServerEvent {
                 MessageService::getMessagesRequest($content, $userId, $seq, $serv, $fd);
                 break;
             case Cmd::CreateGroup:
-                $reqCreateGroupCmd = new CreateGroupRequest();
-                $reqCreateGroupCmd->mergeFromString($content);
-                if ($userId != $reqCreateGroupCmd->getOwnerAccount()) {
-                    echo "发送建群申请的玩家和群主ID不一致" . PHP_EOL;
-                    return false;
-                }
-                $groupId = $reqCreateGroupCmd->getGroupId();
-                $respCmd = new CreateGroupResponse();
-                $respCmd->setGroupId($groupId);
-                $respCmd->setActStatus(ActionStatus::Ok);
-                $respCmd->setErrCode(ErrorCode::Success);
-                $content = $respCmd->serializeToString();
+                //$reqCreateGroupCmd = new CreateGroupRequest();
+                //$reqCreateGroupCmd->mergeFromString($content);
+                //if ($userId != $reqCreateGroupCmd->getOwnerAccount()) {
+                    //echo "发送建群申请的玩家和群主ID不一致" . PHP_EOL;
+                    //return false;
+                //}
+                //$groupId = $reqCreateGroupCmd->getGroupId();
+                //$respCmd = new CreateGroupResponse();
+                //$respCmd->setGroupId($groupId);
+                //$respCmd->setActStatus(ActionStatus::Ok);
+                //$respCmd->setErrCode(ErrorCode::Success);
+                //$content = $respCmd->serializeToString();
                 //self::sendResponseToPlayer($content, $fd, $serv, $seq, $userId, Cmd::CreateGroupResp);
-                echo "收到建群请求 并成功建群" . PHP_EOL;
+                //echo "收到建群请求 并成功建群" . PHP_EOL;
 
                 //想把数据存到数据库 还有点问题 先跳过吧
                 /*$sql = "select from group where groupId = ?";
                 $res = Db::table('group')->get();
                 var_dump($res);*/
-                break;
+                //break;
             default:
                 echo $cmd . "not found" . PHP_EOL;
                 return;
